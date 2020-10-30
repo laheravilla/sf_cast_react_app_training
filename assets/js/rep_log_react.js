@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 
+/*
 const elem = React.createElement(
     "h2",
     null,
@@ -10,6 +11,14 @@ const elem = React.createElement(
         null,
         " <3"
     )
+);
+ */
+
+const elem = (
+    <h2>
+        Hello
+        <strong> World!</strong>
+    </h2>
 );
 
 console.log(elem);

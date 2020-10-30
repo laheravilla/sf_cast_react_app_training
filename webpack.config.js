@@ -26,6 +26,9 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .cleanupOutputBeforeBuild()
     .enableVersioning(Encore.isProduction())
+
+    // Allows to use JSX
+    .enableReactPreset()
 ;
 
 // export the final configuration
