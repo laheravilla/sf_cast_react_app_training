@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // Presentational, stateless component. Receives and print data
 export default function repLogList(props) {
@@ -28,3 +29,9 @@ export default function repLogList(props) {
         </tbody>
     );
 }
+
+repLogList.propTypes = {
+    // By default, props are optional
+    highlightedRowId: PropTypes.any,
+    onRowMouseOver: PropTypes.func.isRequired // Make it required
+};

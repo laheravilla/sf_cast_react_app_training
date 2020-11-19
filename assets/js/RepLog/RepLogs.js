@@ -1,5 +1,6 @@
 import React from "react";
 import RepLogList from "./RepLogList";
+import PropTypes from "prop-types";
 
 export default function repLogs(props) {
     const { withTitle, highlightedRowId, onRowMouseOver } = props;
@@ -72,3 +73,9 @@ export default function repLogs(props) {
         </div>
     );
 }
+
+repLogs.propTypes = {
+    withTitle: PropTypes.bool.isRequired,
+    highlightedRowId: PropTypes.any,
+    onRowMouseOver: PropTypes.func.isRequired // Make it required
+};
