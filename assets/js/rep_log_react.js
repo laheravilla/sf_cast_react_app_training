@@ -5,6 +5,6 @@ import RepLogApp from "./RepLog/RepLogApp";
 const shouldShowTitle = true;
 
 render(
-    <RepLogApp title={shouldShowTitle} />,
+    <RepLogApp withTitle={shouldShowTitle} />,
     document.getElementById("lift-stuff-app")
 );

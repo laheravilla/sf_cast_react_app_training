@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 
 export default class RepLogApp extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            highLightedRowId: null
+        }
+    }
+
     render() {
+        const { highLightedRowId } = this.state;
+        const { withTitle } = this.props;
         let title = "";
-        if (this.props.title) {
+
+        if (withTitle) {
             title = <strong>Lift History</strong>;
         }
 
@@ -31,7 +42,10 @@ export default class RepLogApp extends Component {
                     <tbody>
                     {repLogs.map(repLog => (
                         // Each outer element must have a unique key
-                        <tr key={repLog.id}>
+                        <tr
+                            key={repLog.id}
+                            className={highLightedRowId === repLog.id ? "info" : ""}
+                        >
                             <td>{repLog.itemLabel}</td>
                             <td>{repLog.reps}</td>
                             <td>{repLog.totalWeight}</td>
