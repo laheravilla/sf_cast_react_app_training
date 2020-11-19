@@ -5,12 +5,16 @@ export default class RepLogApp extends Component {
         super(props);
 
         this.state = {
-            highLightedRowId: null
+            highlightedRowId: null
         }
     }
 
+    handleRowMouseOver(repLogId, e) {
+        this.setState({highlightedRowId: repLogId});
+    }
+
     render() {
-        const { highLightedRowId } = this.state;
+        const { highlightedRowId } = this.state;
         const { withTitle } = this.props;
         let title = "";
 
@@ -44,7 +48,8 @@ export default class RepLogApp extends Component {
                         // Each outer element must have a unique key
                         <tr
                             key={repLog.id}
-                            className={highLightedRowId === repLog.id ? "info" : ""}
+                            className={highlightedRowId === repLog.id ? "info" : ""}
+                            onMouseOver={Event => this.handleRowMouseOver(repLog.id, Event)}
                         >
                             <td>{repLog.itemLabel}</td>
                             <td>{repLog.reps}</td>
