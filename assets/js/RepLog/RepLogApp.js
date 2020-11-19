@@ -8,9 +8,11 @@ export default class RepLogApp extends Component {
         this.state = {
             highlightedRowId: null
         }
+        // Whoever calls this method will always refer to this instance
+        this.handleRowMouseOver = this.handleRowMouseOver.bind(this);
     }
 
-    handleRowMouseOver(repLogId, e) {
+    handleRowMouseOver(repLogId) {
         this.setState({highlightedRowId: repLogId});
     }
 
@@ -38,7 +40,10 @@ export default class RepLogApp extends Component {
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
-                    <RepLogList highlightedRowId={highlightedRowId}/>
+                    <RepLogList
+                        highlightedRowId={highlightedRowId}
+                        onRowMouseOver={this.handleRowMouseOver}
+                    />
                     <tfoot>
                         <tr>
                             <td>&nbsp;</td>

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 export default class RepLogList extends Component {
     render() {
-        const { highlightedRowId } = this.props;
+        const { highlightedRowId, onRowMouseOver } = this.props;
 
         const repLogs = [
             { id: 1, reps: 25, itemLabel: "My Laptop", totalWeight: 112.5 },
@@ -17,7 +17,7 @@ export default class RepLogList extends Component {
                 <tr
                     key={repLog.id}
                     className={highlightedRowId === repLog.id ? "info" : ""}
-                    onMouseOver={Event => this.handleRowMouseOver(repLog.id, Event)}
+                    onMouseOver={() => onRowMouseOver(repLog.id)}
                 >
                     <td>{repLog.itemLabel}</td>
                     <td>{repLog.reps}</td>
