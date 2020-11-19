@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import RepLogList from "./RepLogList";
 
 export default class RepLogApp extends Component {
     constructor(props) {
@@ -22,12 +23,6 @@ export default class RepLogApp extends Component {
             title = <strong>Lift History</strong>;
         }
 
-        const repLogs = [
-            { id: 1, reps: 25, itemLabel: "My Laptop", totalWeight: 112.5 },
-            { id: 2, reps: 10, itemLabel: "Big fat Cat", totalWeight: 180 },
-            { id: 8, reps: 4, itemLabel: "Big fat Cat", totalWeight: 72 }
-        ];
-
         return (
             <div className="col-md-7">
                 <h2>
@@ -43,21 +38,7 @@ export default class RepLogApp extends Component {
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {repLogs.map(repLog => (
-                        // Each outer element must have a unique key
-                        <tr
-                            key={repLog.id}
-                            className={highlightedRowId === repLog.id ? "info" : ""}
-                            onMouseOver={Event => this.handleRowMouseOver(repLog.id, Event)}
-                        >
-                            <td>{repLog.itemLabel}</td>
-                            <td>{repLog.reps}</td>
-                            <td>{repLog.totalWeight}</td>
-                            <td>...</td>
-                        </tr>
-                    ))}
-                    </tbody>
+                    <RepLogList highlightedRowId={highlightedRowId}/>
                     <tfoot>
                         <tr>
                             <td>&nbsp;</td>
