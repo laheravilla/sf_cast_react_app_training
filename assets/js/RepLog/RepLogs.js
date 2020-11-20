@@ -9,12 +9,18 @@ import PropTypes from "prop-types";
 const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, log) => total + log.totalWeight, 0);
 
 export default function repLogs(props) {
-    const { withTitle, highlightedRowId, onRowMouseOver, repLogs } = props;
+    const { withTitle, highlightedRowId, onRowMouseOver, repLogs, onNewItemSubmit } = props;
     let title = "";
 
     if (withTitle) {
         title = <strong>Lift History</strong>;
     }
+
+    const handleFormSubmit = (Event) => {
+        Event.preventDefault();
+        console.log("Form submission!");
+        onNewItemSubmit('Big Fat Cat', Event.target.elements.namedItem("reps").value);
+    };
 
     return (
         <div className="col-md-7">
@@ -46,7 +52,7 @@ export default function repLogs(props) {
                 </tfoot>
             </table>
 
-            <form className="form-inline" noValidate>
+            <form className="form-inline" onSubmit={handleFormSubmit}>
                 <div className="form-group">
                     <label className="sr-only control-label required" htmlFor="rep_log_item">
                         What did you lift?
@@ -85,5 +91,6 @@ repLogs.propTypes = {
     withTitle: PropTypes.bool.isRequired,
     highlightedRowId: PropTypes.any,
     onRowMouseOver: PropTypes.func.isRequired, // Make it required
-    repLogs: PropTypes.array.isRequired
+    onNewItemSubmit: PropTypes.func.isRequired,
+    repLogs: PropTypes.array.isRequired,
 };
