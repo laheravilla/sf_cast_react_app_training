@@ -2,6 +2,12 @@ import React from "react";
 import RepLogList from "./RepLogList";
 import PropTypes from "prop-types";
 
+/**
+ * @see https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
+ * @example arr.reduce(callback, valeurInitiale)
+ */
+const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, log) => total + log.totalWeight, 0);
+
 export default function repLogs(props) {
     const { withTitle, highlightedRowId, onRowMouseOver, repLogs } = props;
     let title = "";
@@ -34,7 +40,7 @@ export default function repLogs(props) {
                 <tr>
                     <td>&nbsp;</td>
                     <th>Total</th>
-                    <th>TODO</th>
+                    <th>{calculateTotalWeightLifted(repLogs)}</th>
                     <td>&nbsp;</td>
                 </tr>
                 </tfoot>

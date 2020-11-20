@@ -23,14 +23,10 @@ export default class RepLogApp extends Component {
     }
 
     render() {
-        const { highlightedRowId, repLogs } = this.state;
-        const { withTitle } = this.props;
-
         return (
             <RepLogs
-                withTitle={withTitle}
-                highlightedRowId={highlightedRowId}
-                repLogs={repLogs}
+                {...this.props}
+                {...this.state}
                 onRowMouseOver={this.handleRowMouseOver}
             />
         );
