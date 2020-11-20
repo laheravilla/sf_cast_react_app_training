@@ -29,6 +29,12 @@ Encore
 
     // Allows to use JSX
     .enableReactPreset()
+    // Remove unnecessary React propTypes from the production build
+    .configureBabel(babelConfig => {
+        if (Encore.isProduction()) {
+            babelConfig.plugins.push("transform-react-remove-prop-types");
+        }
+    })
 ;
 
 // export the final configuration
