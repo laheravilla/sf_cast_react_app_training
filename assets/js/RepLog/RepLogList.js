@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 
 // Presentational, stateless component. Receives and print data
 export default function repLogList(props) {
-    const { highlightedRowId, onRowMouseOver } = props;
-
-    const repLogs = [
-        { id: 1, reps: 25, itemLabel: "My Laptop", totalWeight: 112.5 },
-        { id: 2, reps: 10, itemLabel: "Big fat Cat", totalWeight: 180 },
-        { id: 8, reps: 4, itemLabel: "Big fat Cat", totalWeight: 72 }
-    ];
+    const { highlightedRowId, onRowMouseOver, repLogs } = props;
 
     return (
         <tbody>
@@ -33,5 +27,6 @@ export default function repLogList(props) {
 repLogList.propTypes = {
     // By default, props are optional
     highlightedRowId: PropTypes.any,
-    onRowMouseOver: PropTypes.func.isRequired // Make it required
+    onRowMouseOver: PropTypes.func.isRequired, // Make it required
+    repLogs: PropTypes.array.isRequired
 };

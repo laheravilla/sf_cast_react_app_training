@@ -3,7 +3,7 @@ import RepLogList from "./RepLogList";
 import PropTypes from "prop-types";
 
 export default function repLogs(props) {
-    const { withTitle, highlightedRowId, onRowMouseOver } = props;
+    const { withTitle, highlightedRowId, onRowMouseOver, repLogs } = props;
     let title = "";
 
     if (withTitle) {
@@ -28,6 +28,7 @@ export default function repLogs(props) {
                 <RepLogList
                     highlightedRowId={highlightedRowId}
                     onRowMouseOver={onRowMouseOver}
+                    repLogs={repLogs}
                 />
                 <tfoot>
                 <tr>
@@ -77,5 +78,6 @@ export default function repLogs(props) {
 repLogs.propTypes = {
     withTitle: PropTypes.bool.isRequired,
     highlightedRowId: PropTypes.any,
-    onRowMouseOver: PropTypes.func.isRequired // Make it required
+    onRowMouseOver: PropTypes.func.isRequired, // Make it required
+    repLogs: PropTypes.array.isRequired
 };

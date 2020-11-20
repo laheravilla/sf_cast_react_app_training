@@ -7,7 +7,12 @@ export default class RepLogApp extends Component {
         super(props);
 
         this.state = {
-            highlightedRowId: null
+            highlightedRowId: null,
+            repLogs: [
+                { id: 1, reps: 25, itemLabel: "My Laptop", totalWeight: 112.5 },
+                { id: 2, reps: 10, itemLabel: "Big fat Cat", totalWeight: 180 },
+                { id: 8, reps: 4, itemLabel: "Big fat Cat", totalWeight: 72 }
+            ]
         }
         // Whoever calls this method will always refer to this instance
         this.handleRowMouseOver = this.handleRowMouseOver.bind(this);
@@ -18,13 +23,14 @@ export default class RepLogApp extends Component {
     }
 
     render() {
-        const { highlightedRowId } = this.state;
+        const { highlightedRowId, repLogs } = this.state;
         const { withTitle } = this.props;
 
         return (
             <RepLogs
                 withTitle={withTitle}
                 highlightedRowId={highlightedRowId}
+                repLogs={repLogs}
                 onRowMouseOver={this.handleRowMouseOver}
             />
         );
