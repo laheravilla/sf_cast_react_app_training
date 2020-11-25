@@ -10,7 +10,14 @@ import RepLogCreator from "./RepLogCreator";
 const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, log) => total + log.totalWeight, 0);
 
 export default function repLogs(props) {
-    const { withTitle, highlightedRowId, onRowMouseOver, repLogs, onNewItemSubmit } = props;
+    const {
+        withTitle,
+        highlightedRowId,
+        onRowMouseOver,
+        repLogs,
+        onAddRepLog
+    } = props;
+
     let title = "";
 
     if (withTitle) {
@@ -48,7 +55,7 @@ export default function repLogs(props) {
             </table>
 
             <RepLogCreator
-                onNewItemSubmit={onNewItemSubmit}
+                onAddRepLog={onAddRepLog}
             />
         </div>
     );
@@ -58,6 +65,6 @@ repLogs.propTypes = {
     withTitle: PropTypes.bool.isRequired,
     highlightedRowId: PropTypes.any,
     onRowMouseOver: PropTypes.func.isRequired, // Make it required
-    onNewItemSubmit: PropTypes.func.isRequired,
+    onAddRepLog: PropTypes.func.isRequired,
     repLogs: PropTypes.array.isRequired,
 };

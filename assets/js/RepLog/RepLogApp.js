@@ -11,21 +11,22 @@ export default class RepLogApp extends Component {
             highlightedRowId: null,
             repLogs: [
                 { id: uuidv4(), reps: 25, itemLabel: "My Laptop", totalWeight: 112.5 },
-                { id: uuidv4(), reps: 10, itemLabel: "Big fat Cat", totalWeight: 180 },
-                { id: uuidv4(), reps: 4, itemLabel: "Big fat Cat", totalWeight: 72 }
+                { id: uuidv4(), reps: 10, itemLabel: "Big Fat Cat", totalWeight: 180 },
+                { id: uuidv4(), reps: 4, itemLabel: "Big Fat Cat", totalWeight: 72 }
             ]
         }
+
         // Whoever calls this method will always refer to this instance
         this.handleRowMouseOver = this.handleRowMouseOver.bind(this);
-        this.handleNewItemSubmit = this.handleNewItemSubmit.bind(this);
+        // This binding is necessary to make `this` work in the callback
+        this.handleAddRepLog = this.handleAddRepLog.bind(this);
     }
 
     handleRowMouseOver(repLogId) {
         this.setState({highlightedRowId: repLogId});
     }
 
-    handleNewItemSubmit(itemLabel, reps) {
-        const repLogs = this.state.repLogs;
+    handleAddRepLog(itemLabel, reps) {
         const newRep = {
             id: uuidv4(),
             itemLabel,
@@ -33,8 +34,10 @@ export default class RepLogApp extends Component {
             totalWeight: Math.floor(Math.random() * 50)
         };
 
-        repLogs.push(newRep);
-        this.setState({repLogs});
+        // If new state depends on current state then...
+        // Avoid mutate state by cloning object
+        // When returning an object in a arrow function we use "()" around the object
+        this.setState(state => ( {repLogs: [...state.repLogs, newRep] }) );
     }
 
     render() {
@@ -43,7 +46,7 @@ export default class RepLogApp extends Component {
                 {...this.props}
                 {...this.state}
                 onRowMouseOver={this.handleRowMouseOver}
-                onNewItemSubmit={this.handleNewItemSubmit}
+                onAddRepLog={this.handleAddRepLog}
             />
         );
     }
