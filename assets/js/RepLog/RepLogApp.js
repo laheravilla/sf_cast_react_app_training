@@ -13,7 +13,7 @@ export default class RepLogApp extends Component {
                 { id: uuidv4(), reps: 25, itemLabel: "My Laptop", totalWeight: 112.5 },
                 { id: uuidv4(), reps: 10, itemLabel: "Big Fat Cat", totalWeight: 180 },
                 { id: uuidv4(), reps: 4, itemLabel: "Big Fat Cat", totalWeight: 72 }
-            ]
+            ],
         }
 
         // Whoever calls this method will always refer to this instance
