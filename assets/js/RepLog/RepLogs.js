@@ -2,7 +2,7 @@ import React from "react";
 import RepLogList from "./RepLogList";
 import PropTypes from "prop-types";
 import RepLogCreator from "./RepLogCreator";
-import { v4 as uuidv4 } from "uuid";
+// import RepLogCreator from "./RepLogCreatorControlledComponents";
 
 /**
  * @see https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
