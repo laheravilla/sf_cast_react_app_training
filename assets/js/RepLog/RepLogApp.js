@@ -22,6 +22,7 @@ export default class RepLogApp extends Component {
         this.handleHeartChange = this.handleHeartChange.bind(this);
         // Whoever calls this method will always refer to this instance
         this.handleRowMouseOver = this.handleRowMouseOver.bind(this);
+        this.handleDeleteRepLog = this.handleDeleteRepLog.bind(this);
     }
 
     handleRowMouseOver(repLogId) {
@@ -48,6 +49,15 @@ export default class RepLogApp extends Component {
         });
     }
 
+    handleDeleteRepLog(id) {
+        // Remove the rep log without mutating state
+        // by filtering. This will return a new array
+        this.setState(prevState => (
+            { repLogs: prevState.repLogs.filter(item => item.id !== id) }
+            )
+        );
+    }
+
     render() {
         return (
             <RepLogs
@@ -56,6 +66,7 @@ export default class RepLogApp extends Component {
                 onRowMouseOver={this.handleRowMouseOver}
                 onAddRepLog={this.handleAddRepLog}
                 onHeartChange={this.handleHeartChange}
+                onDeleteRepLog={this.handleDeleteRepLog}
             />
         );
     }

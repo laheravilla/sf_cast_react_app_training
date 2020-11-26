@@ -18,6 +18,7 @@ export default function repLogs(props) {
         repLogs,
         onAddRepLog,
         onHeartChange,
+        onDeleteRepLog,
         numberOfHearts
     } = props;
 
@@ -50,6 +51,7 @@ export default function repLogs(props) {
                     highlightedRowId={highlightedRowId}
                     onRowMouseOver={onRowMouseOver}
                     repLogs={repLogs}
+                    onDeleteRepLog={onDeleteRepLog}
                 />
                 <tfoot>
                 <tr>
@@ -78,6 +80,7 @@ repLogs.propTypes = {
     onRowMouseOver: PropTypes.func.isRequired, // Make it required
     onAddRepLog: PropTypes.func.isRequired,
     onHeartChange: PropTypes.func.isRequired,
+    onDeleteRepLog: PropTypes.func.isRequired,
     repLogs: PropTypes.array.isRequired,
     numberOfHearts: PropTypes.number.isRequired
 };
