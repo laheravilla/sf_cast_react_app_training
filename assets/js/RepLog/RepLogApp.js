@@ -14,12 +14,14 @@ export default class RepLogApp extends Component {
                 { id: uuidv4(), reps: 10, itemLabel: "Big Fat Cat", totalWeight: 180 },
                 { id: uuidv4(), reps: 4, itemLabel: "Big Fat Cat", totalWeight: 72 }
             ],
+            numberOfHearts: 1
         }
 
-        // Whoever calls this method will always refer to this instance
-        this.handleRowMouseOver = this.handleRowMouseOver.bind(this);
         // This binding is necessary to make `this` work in the callback
         this.handleAddRepLog = this.handleAddRepLog.bind(this);
+        this.handleHeartChange = this.handleHeartChange.bind(this);
+        // Whoever calls this method will always refer to this instance
+        this.handleRowMouseOver = this.handleRowMouseOver.bind(this);
     }
 
     handleRowMouseOver(repLogId) {
@@ -40,6 +42,12 @@ export default class RepLogApp extends Component {
         this.setState(state => ( {repLogs: [...state.repLogs, newRep] }) );
     }
 
+    handleHeartChange(heartCount) {
+        this.setState({
+            numberOfHearts: heartCount
+        });
+    }
+
     render() {
         return (
             <RepLogs
@@ -47,11 +55,12 @@ export default class RepLogApp extends Component {
                 {...this.state}
                 onRowMouseOver={this.handleRowMouseOver}
                 onAddRepLog={this.handleAddRepLog}
+                onHeartChange={this.handleHeartChange}
             />
         );
     }
 }
 
 RepLogApp.propTypes = {
-    withTitle: PropTypes.bool
+    withHeart: PropTypes.bool
 };

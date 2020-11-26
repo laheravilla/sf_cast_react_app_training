@@ -2,6 +2,7 @@ import React from "react";
 import RepLogList from "./RepLogList";
 import PropTypes from "prop-types";
 import RepLogCreator from "./RepLogCreator";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * @see https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
@@ -11,25 +12,31 @@ const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, log) => tot
 
 export default function repLogs(props) {
     const {
-        withTitle,
+        withHeart,
         highlightedRowId,
         onRowMouseOver,
         repLogs,
-        onAddRepLog
+        onAddRepLog,
+        onHeartChange,
+        numberOfHearts
     } = props;
 
-    let title = "";
+    let heart = "";
 
-    if (withTitle) {
-        title = <strong>Lift History</strong>;
+    if (withHeart) {
+        heart = Array.from(Array(numberOfHearts),(x, i) => <i className="fas fa-heart" key={i}/>);
     }
 
     return (
         <div className="col-md-7">
-            <h2>
-                {title}
-            </h2>
+            <h2>Lift History! {heart}</h2>
             <hr/>
+            <input
+                type="number"
+                value={numberOfHearts}
+                onChange={Event => onHeartChange(+Event.target.value)}
+            />
+
             <table className="table table-striped">
                 <thead>
                 <tr>
@@ -66,9 +73,11 @@ export default function repLogs(props) {
 }
 
 repLogs.propTypes = {
-    withTitle: PropTypes.bool.isRequired,
+    withHeart: PropTypes.bool.isRequired,
     highlightedRowId: PropTypes.any,
     onRowMouseOver: PropTypes.func.isRequired, // Make it required
     onAddRepLog: PropTypes.func.isRequired,
+    onHeartChange: PropTypes.func.isRequired,
     repLogs: PropTypes.array.isRequired,
+    numberOfHearts: PropTypes.number.isRequired
 };
