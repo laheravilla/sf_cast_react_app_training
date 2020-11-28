@@ -8,7 +8,7 @@ import RepLogCreator from "./RepLogCreator";
  * @see https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
  * @example arr.reduce(callback, valeurInitiale)
  */
-const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, log) => total + log.totalWeight, 0);
+const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, log) => total + log.totalWeightLifted, 0);
 
 export default function repLogs(props) {
     const {

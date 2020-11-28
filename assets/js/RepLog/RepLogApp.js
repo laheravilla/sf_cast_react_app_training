@@ -12,11 +12,7 @@ export default class RepLogApp extends Component {
 
         this.state = {
             highlightedRowId: null,
-            repLogs: [
-                { id: uuidv4(), reps: 25, itemLabel: "My Laptop", totalWeight: 112.5 },
-                { id: uuidv4(), reps: 10, itemLabel: "Big Fat Cat", totalWeight: 180 },
-                { id: uuidv4(), reps: 4, itemLabel: "Big Fat Cat", totalWeight: 72 }
-            ],
+            repLogs: [],
             numberOfHearts: 1
         }
 
@@ -26,6 +22,11 @@ export default class RepLogApp extends Component {
         // Whoever calls this method will always refer to this instance
         this.handleRowMouseOver = this.handleRowMouseOver.bind(this);
         this.handleDeleteRepLog = this.handleDeleteRepLog.bind(this);
+    }
+
+    // Lifecycle method called right after component is rendered to the DOM
+    componentDidMount() {
+        getRepLogs().then(data => this.setState({ repLogs: data }));
     }
 
     handleRowMouseOver(repLogId) {

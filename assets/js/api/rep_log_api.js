@@ -1,6 +1,8 @@
 export function getRepLogs() {
-    return fetch("/reps")
+    return fetch("/reps", {
+        credentials: "same-origin" // send cookies to any request back to the domain
+    })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => data.items)
         .catch(error => console.error(error));
 }
