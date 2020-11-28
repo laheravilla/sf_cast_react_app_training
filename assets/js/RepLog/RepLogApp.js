@@ -37,18 +37,15 @@ export default class RepLogApp extends Component {
         this.setState({highlightedRowId: repLogId});
     }
 
-    handleAddRepLog(itemLabel, reps) {
-        const newRep = {
-            id: uuidv4(),
-            itemLabel,
-            reps,
-            totalWeight: Math.floor(Math.random() * 50)
-        };
+    handleAddRepLog(item, reps) {
+        const newRep = { item, reps };
 
         // If new state depends on current state then...
         // Avoid mutate state by cloning object
         // When returning an object in a arrow function we use "()" around the object
-        this.setState(state => ( {repLogs: [...state.repLogs, newRep] }) );
+        this.repLogApi.createRepLog(newRep, repLog => {
+            this.setState(state => ( {repLogs: [...state.repLogs, repLog] }) );
+        });
     }
 
     handleHeartChange(heartCount) {
