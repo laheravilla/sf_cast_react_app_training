@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import RepLogs from "./RepLogs";
 import PropTypes from "prop-types";
-import { v4 as uuidv4 } from "uuid";
 import RepLogApi from "../api/RepLogApi";
 
 export default class RepLogApp extends Component {
