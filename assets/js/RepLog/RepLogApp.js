@@ -13,7 +13,8 @@ export default class RepLogApp extends Component {
         this.state = {
             highlightedRowId: null,
             repLogs: [],
-            numberOfHearts: 1
+            numberOfHearts: 1,
+            isLoaded: false
         }
 
         // This binding is necessary to make `this` work in the callback
@@ -26,7 +27,10 @@ export default class RepLogApp extends Component {
 
     // Lifecycle method called right after component is rendered to the DOM
     componentDidMount() {
-        getRepLogs().then(data => this.setState({ repLogs: data }));
+        getRepLogs().then(data => this.setState({
+            repLogs: data,
+            isLoaded: true
+        }));
     }
 
     handleRowMouseOver(repLogId) {

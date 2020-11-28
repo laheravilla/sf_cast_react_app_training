@@ -3,11 +3,21 @@ import PropTypes from "prop-types";
 
 // Presentational, stateless component. Receives and print data
 export default function repLogList(props) {
-    const { highlightedRowId, onRowMouseOver, onDeleteRepLog, repLogs } = props;
+    const { highlightedRowId, onRowMouseOver, onDeleteRepLog, repLogs, isLoaded } = props;
     const handleDeleteClick = (Event, repLogId) => {
         Event.preventDefault();
         onDeleteRepLog(repLogId);
     };
+
+    if (!isLoaded) {
+        return (
+            <tbody>
+                <tr>
+                    <td colSpan="4" className="text-center">Loading...</td>
+                </tr>
+            </tbody>
+        )
+    }
 
     return (
         <tbody>
@@ -37,5 +47,6 @@ repLogList.propTypes = {
     highlightedRowId: PropTypes.any,
     onRowMouseOver: PropTypes.func.isRequired, // Make it required
     repLogs: PropTypes.array.isRequired,
-    onDeleteRepLog: PropTypes.func.isRequired
+    onDeleteRepLog: PropTypes.func.isRequired,
+    isLoaded: PropTypes.bool.isRequired
 };
