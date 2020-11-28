@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import RepLogs from "./RepLogs";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
-import { getRepLogs } from "../api/rep_log_api";
+import RepLogApi from "../api/RepLogApi";
 
 export default class RepLogApp extends Component {
     constructor(props) {
         super(props);
-
-        getRepLogs();
-
         this.state = {
             highlightedRowId: null,
             repLogs: [],
@@ -17,6 +14,7 @@ export default class RepLogApp extends Component {
             isLoaded: false
         }
 
+        this.repLogApi = new RepLogApi();
         // This binding is necessary to make `this` work in the callback
         this.handleAddRepLog = this.handleAddRepLog.bind(this);
         this.handleHeartChange = this.handleHeartChange.bind(this);
@@ -27,10 +25,12 @@ export default class RepLogApp extends Component {
 
     // Lifecycle method called right after component is rendered to the DOM
     componentDidMount() {
-        getRepLogs().then(data => this.setState({
-            repLogs: data,
-            isLoaded: true
-        }));
+        this.repLogApi.getRepLogs({}, data => {
+            this.setState({
+                repLogs: data.items,
+                isLoaded: true
+            });
+        });
     }
 
     handleRowMouseOver(repLogId) {
@@ -58,6 +58,8 @@ export default class RepLogApp extends Component {
     }
 
     handleDeleteRepLog(id) {
+        this.repLogApi.deleteRepLog(id);
+
         // Remove the rep log without mutating state
         // by filtering. This will return a new array
         this.setState(prevState => (
