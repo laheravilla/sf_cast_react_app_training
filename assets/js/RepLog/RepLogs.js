@@ -20,7 +20,9 @@ export default function repLogs(props) {
         onHeartChange,
         onDeleteRepLog,
         numberOfHearts,
-        isLoaded
+        isLoaded,
+        isSavingNewRepLog,
+        successMessage
     } = props;
 
     let heart = "";
@@ -34,10 +36,14 @@ export default function repLogs(props) {
             <h2>Lift History! {heart}</h2>
             <hr/>
             <input
-                type="number"
+                type="range"
                 value={numberOfHearts}
                 onChange={Event => onHeartChange(+Event.target.value)}
             />
+
+            {successMessage && (
+                <div className="alert alert-success text-center">{successMessage}</div>
+            )}
 
             <table className="table table-striped">
                 <thead>
@@ -54,6 +60,7 @@ export default function repLogs(props) {
                     repLogs={repLogs}
                     onDeleteRepLog={onDeleteRepLog}
                     isLoaded={isLoaded}
+                    isSavingNewRepLog={isSavingNewRepLog}
                 />
                 <tfoot>
                 <tr>
@@ -85,5 +92,7 @@ repLogs.propTypes = {
     onDeleteRepLog: PropTypes.func.isRequired,
     repLogs: PropTypes.array.isRequired,
     numberOfHearts: PropTypes.number.isRequired,
-    isLoaded: PropTypes.bool.isRequired
+    isLoaded: PropTypes.bool.isRequired,
+    isSavingNewRepLog: PropTypes.bool.isRequired,
+    successMessage: PropTypes.string.isRequired
 };

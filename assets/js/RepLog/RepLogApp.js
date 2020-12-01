@@ -10,10 +10,15 @@ export default class RepLogApp extends Component {
             highlightedRowId: null,
             repLogs: [],
             numberOfHearts: 1,
-            isLoaded: false
+            isLoaded: false,
+            isSavingNewRepLog: false,
+            successMessage: ""
         }
 
+        // Initializing
         this.repLogApi = new RepLogApi();
+        this.successMessageTimeoutHandle = 0;
+
         // This binding is necessary to make `this` work in the callback
         this.handleAddRepLog = this.handleAddRepLog.bind(this);
         this.handleHeartChange = this.handleHeartChange.bind(this);
@@ -32,6 +37,11 @@ export default class RepLogApp extends Component {
         });
     }
 
+    // Lifecycle method call before component is removed from DOM
+    componentWillUnmount() {
+        clearTimeout(this.successMessageTimeoutHandle);
+    }
+
     handleRowMouseOver(repLogId) {
         this.setState({highlightedRowId: repLogId});
     }
@@ -39,12 +49,30 @@ export default class RepLogApp extends Component {
     handleAddRepLog(item, reps) {
         const newRep = { item, reps };
 
+        this.setState({ isSavingNewRepLog: true });
+
         // If new state depends on current state then...
         // Avoid mutate state by cloning object
         // When returning an object in a arrow function we use "()" around the object
         this.repLogApi.createRepLog(newRep, repLog => {
-            this.setState(state => ( {repLogs: [...state.repLogs, repLog] }) );
+            this.setState(prevState => ({
+                repLogs: [...prevState.repLogs, repLog],
+                isSavingNewRepLog: false,
+            }));
+
+            this.setSuccessMessage("Rep Log Saved!");
         });
+    }
+
+    setSuccessMessage(message) {
+
+        this.setState({ successMessage: message });
+        clearTimeout(this.successMessageTimeoutHandle);
+        this.successMessageTimeoutHandle = setTimeout(() => {
+            this.setState({successMessage: ""});
+
+            this.successMessageTimeoutHandle = 0;
+        }, 3000);
     }
 
     handleHeartChange(heartCount) {
