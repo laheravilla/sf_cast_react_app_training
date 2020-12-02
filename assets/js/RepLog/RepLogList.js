@@ -27,6 +27,9 @@ export default function repLogList(props) {
                 key={repLog.id}
                 className={highlightedRowId === repLog.id ? "info" : ""}
                 onMouseOver={() => onRowMouseOver(repLog.id)}
+                style={{
+                    opacity: repLog.isDeleting ? .3 : 1
+                }}
             >
                 <td>{repLog.itemLabel}</td>
                 <td>{repLog.reps}</td>
