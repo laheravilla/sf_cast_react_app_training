@@ -17,7 +17,7 @@ export default class Http {
                 return response.text()
                     .then(text => text ? JSON.parse(text) : ""); // Send text if it's not json
             } else {
-                let error = new Error('Something went wrong on api server!');
+                const error = new Error(response.statusText);
                 error.response = response;
                 throw error;
             }

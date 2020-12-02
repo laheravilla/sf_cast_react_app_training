@@ -16,7 +16,8 @@ export default class RepLogCreator extends Component {
             {id: "cat", text: "Cat"},
             {id: "fat_cat", text: "Big Fat Cat"},
             {id: "laptop", text: "My Laptop"},
-            {id: "coffee_cup", text: "Coffee Cup"}
+            {id: "coffee_cup", text: "Coffee Cup"},
+            {id: "dark_matter", text: "Dark Matter"}
         ];
     }
 
