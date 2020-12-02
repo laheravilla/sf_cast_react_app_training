@@ -12,7 +12,8 @@ export default class RepLogApp extends Component {
             numberOfHearts: 1,
             isLoaded: false,
             isSavingNewRepLog: false,
-            successMessage: ""
+            successMessage: "",
+            newRepLogValidationErrorMessage: ""
         }
 
         // Initializing
@@ -55,9 +56,15 @@ export default class RepLogApp extends Component {
         // Avoid mutate state by cloning object
         // When returning an object in a arrow function we use "()" around the object
         this.repLogApi.createRepLog(newRep, repLog => {
+            if (repLog.errors) {
+                const firstError = Object.values(repLog.errors)[0];
+                return this.setState({ newRepLogValidationErrorMessage: firstError });
+            }
+
             this.setState(prevState => ({
                 repLogs: [...prevState.repLogs, repLog],
                 isSavingNewRepLog: false,
+                newRepLogValidationErrorMessage: ""
             }));
 
             this.setSuccessMessage("Rep Log Saved!");

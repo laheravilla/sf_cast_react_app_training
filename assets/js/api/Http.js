@@ -25,6 +25,8 @@ export default class Http {
             if (typeof callback === 'function') {
                 callback(data);
             }
-        }).catch(error => console.log(error));
+        }).catch(error => error.response.json()
+            .then(errorsData => callback(errorsData))
+        );
     }
 }
