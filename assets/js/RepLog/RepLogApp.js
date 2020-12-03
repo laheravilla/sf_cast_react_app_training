@@ -49,8 +49,8 @@ export default class RepLogApp extends Component {
 
     handleAddRepLog(item, reps) {
         const newRep = { item, reps };
-
         this.setState({ isSavingNewRepLog: true });
+        const newState = { isSavingNewRepLog: false };
 
         // If new state depends on current state then...
         // Avoid mutate state by cloning object
@@ -58,14 +58,20 @@ export default class RepLogApp extends Component {
         this.repLogApi.createRepLog(newRep, repLog => {
             if (repLog.errors) {
                 const firstError = Object.values(repLog.errors)[0];
-                return this.setState({ newRepLogValidationErrorMessage: firstError });
+                return this.setState(Object.assign({
+                    newRepLogValidationErrorMessage: firstError,
+                    isSavingNewRepLog: false
+                }, newState)); // Merge newSte into the object without modifying existing properties
             }
 
-            this.setState(prevState => ({
-                repLogs: [...prevState.repLogs, repLog],
-                isSavingNewRepLog: false,
-                newRepLogValidationErrorMessage: ""
-            }));
+            this.setState(prevState => {
+                return {
+                    repLogs: [...prevState.repLogs, repLog],
+                    isSavingNewRepLog: false,
+                    newRepLogValidationErrorMessage: "",
+                    ...newState // Merge newSte into the object without modifying existing properties
+                };
+            });
 
             this.setSuccessMessage("Rep Log Saved!");
         });
@@ -96,7 +102,7 @@ export default class RepLogApp extends Component {
                         return repLog;
                     }
 
-                    return Object.assign({}, repLog, { isDeleting: true});
+                    return { ...repLog, isDeleting: true };
                 })
             }
         });
