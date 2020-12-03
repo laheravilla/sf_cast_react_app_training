@@ -2,15 +2,12 @@
 
 {% block body %}
     <div class="row">
-        <div id="lift-stuff-app"></div>
-    </div>
-
-    <div class="row">
+        <div id="lift-stuff-app" class="col-md-7"></div>
 
         <div class="col-md-5">
             <div class="leaderboard">
                 <h2 class="text-center">
-                    <img class="dumbbell" src="{{ asset('build/static/dumbbell.png') }}" />
+{#                    <img class="dumbbell" src="{{ asset('build/static/dumbbell.png') }}" />#}
                     Leaderboard
                 </h2>
 
@@ -28,7 +25,9 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        window.REP_LOG_APP_PROPS = {{ repLogAppProps|json_encode|raw }};
+    </script>
 
-    <script src="{{ asset('build/rep_log.js') }}"></script>
     <script src="{{ asset('build/rep_log_react.js') }}"></script>
 {% endblock %}

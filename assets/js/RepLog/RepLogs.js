@@ -34,7 +34,7 @@ export default function repLogs(props) {
     }
 
     return (
-        <div className="col-md-7">
+        <div>
             <h2>Lift History! {heart}</h2>
             <hr/>
             <input
