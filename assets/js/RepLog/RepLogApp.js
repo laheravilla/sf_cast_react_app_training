@@ -13,7 +13,7 @@ export default class RepLogApp extends Component {
             isLoaded: false,
             isSavingNewRepLog: false,
             successMessage: "",
-            newRepLogValidationErrorMessage: ""
+            newRepLogValidationErrorMessage: "",
         }
 
         // Initializing
@@ -134,5 +134,10 @@ export default class RepLogApp extends Component {
 }
 
 RepLogApp.propTypes = {
-    withHeart: PropTypes.bool
+    withHeart: PropTypes.bool,
+    itemOptions: PropTypes.array
+};
+
+RepLog.defaultProps = {
+    itemOptions: []
 };
